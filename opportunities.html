@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Opportunities</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Available Opportunities</h1>
+    <div id="opportunities"></div>
+
+    <script type="module">
+        import { fetchOpportunities } from "./js/firebase.js";
+
+        document.addEventListener("DOMContentLoaded", async () => {
+            const opportunities = await fetchOpportunities();
+            const container = document.getElementById("opportunities");
+            
+            opportunities.forEach(opportunity => {
+                const div = document.createElement("div");
+                div.innerHTML = `<h2>${opportunity.title}</h2>
+                                 <p>${opportunity.description}</p>
+                                 <p><strong>Location:</strong> ${opportunity.location}</p>`;
+                container.appendChild(div);
+            });
+        });
+    </script>
+</body>
+</html>

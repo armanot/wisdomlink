@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="login-container">
+        <h1>Login to Wisdom Link</h1>
+        <button id="googleLoginBtn">Sign in with Google</button>
+    </div>
+
+    <script type="module">
+        import { googleLogin } from "./js/firebase.js";
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const loginBtn = document.getElementById("googleLoginBtn");
+            if (loginBtn) {
+                loginBtn.addEventListener("click", async () => {
+                    const user = await googleLogin();
+                    if (user) {
+                        console.log("WisdomLink ID:", user.uid);
+                        alert("Your WisdomLink ID: " + user.uid);
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
